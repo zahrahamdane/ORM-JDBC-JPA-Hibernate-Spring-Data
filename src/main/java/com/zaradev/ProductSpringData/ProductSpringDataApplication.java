@@ -32,13 +32,35 @@ public class ProductSpringDataApplication implements CommandLineRunner {
 		});
 
 		Product product = productRepository.findById(Long.valueOf(1)).get();
-		
-		System.out.println("***************************");
+
+		System.out.println("************1***************");
 		System.out.println(product.getId());
 		System.out.println(product.getName());
 		System.out.println(product.getPrice());
 		System.out.println(product.getQuantity());
 
+		System.out.println("*************2**************");
+		List<Product> productList = productRepository.findByNameContains("C");
+		productList.forEach(p->{
+			System.out.println(p.toString());
+		});
 
+		System.out.println("*************3**************");
+		List<Product> productList2 = productRepository.search("%C%");
+		productList2.forEach(p->{
+			System.out.println(p.toString());
+		});
+
+		System.out.println("***************4************");
+		List<Product> productList3 = productRepository.findByPriceGreaterThan(3000);
+		productList3.forEach(p->{
+			System.out.println(p.toString());
+		});
+
+		System.out.println("**************5*************");
+		List<Product> productList4 = productRepository.searchByPrice(3000.00);
+		productList4.forEach(p->{
+			System.out.println(p.toString());
+		});
 	}
 }
